@@ -5,3 +5,16 @@ try to revive dead pixels.
 Dead (always black) pixels are hard to revive, stuck pixels
 on the other hand are more probable to get fixed.
 
+
+This program should be run under the Linux VT. It works by
+cycling the colour on the screen between sRGB(100 %, 0, 0),
+sRGB(0, 100 %, 0) and sRGB(0, 0, 100 %), as fast as possible.
+If you want to slow down the cycling you can add, as the only
+argument, the millisecond time sleep between the colours.
+
+If you are using a graphical environment and do not know how
+to access the Linux VT, here is how you do it: press Ctrl+Alt+F1,
+if this does not open non-graphical login screen, press Alt+Right
+until you get one. To get back to graphical environment, hold
+down Alt+Right until it appears.
+
