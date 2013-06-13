@@ -1,0 +1,66 @@
+#!/usr/bin/env python
+##
+# unstickpixels – screen loop to try to unstick dead pixels
+# 
+# Copyright © 2013  Mattias Andrée (maandree@member.fsf.org)
+# 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+##
+
+import sys
+from subprocess import Popen, PIPE
+
+
+def print(text, end = '\n'):
+    sys.stdout.buffer.write((text + end).encode('utf-8'))
+
+
+(height, width) = Popen(['stty', 'size'], stdout=PIPE).communicate()[0].decode('utf-8', 'replace').split(' ')
+(height, width) = (int(height), int(width))
+COPYING = ['unstickpixels – screen loop to try to unstick dead pixels',
+           '',
+           'Copyright © 2013  Mattias Andrée (maandree@member.fsf.org)',
+           '',
+           'This program is free software: you can redistribute it and/or modify',
+           'it under the terms of the GNU General Public License as published by',
+           'the Free Software Foundation, either version 3 of the License, or',
+           '(at your option) any later version.',
+           '',
+           'This program is distributed in the hope that it will be useful,',
+           'but WITHOUT ANY WARRANTY; without even the implied warranty of',
+           'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the',
+           'GNU General Public License for more details.',
+           '',
+           'You should have received a copy of the GNU General Public License',
+           'along with this program.  If not, see <http://www.gnu.org/licenses/>.']
+
+print('\033[?25l\033[H\033[2J\033[%i;%iH%s' % (height - len(COPYING) + 1, 1, '\n'.join(COPYING)), '')
+print('\033[H\033[01;31mWARNING: Do not used this if you have epilepsia \033[00m\n')
+print('Press C-c to quit, and Enter to start (C-c will quit).')
+
+started = False
+try:
+    input()
+    started = True
+    print('\033[H', '')
+    while True:
+        sys.stdout.buffer.write('\033]P0FF0000\033[2J'.encode('utf-8'))
+        sys.stdout.buffer.write('\033]P000FF00\033[2J'.encode('utf-8'))
+        sys.stdout.buffer.write('\033]P00000FF\033[2J'.encode('utf-8'))
+except:
+    pass
+if started:
+    print('\033]P0000000', '')
+print('\033[?25h\033[H\033[2J', '')
+
