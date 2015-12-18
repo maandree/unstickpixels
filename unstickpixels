@@ -2,7 +2,7 @@
 ##
 # unstickpixels – screen loop to try to unstick dead pixels
 # 
-# Copyright © 2013  Mattias Andrée (maandree@member.fsf.org)
+# Copyright © 2013, 2015  Mattias Andrée (maandree@member.fsf.org)
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ sleep = 0 if len(sys.argv) < 2 else int(sys.argv[1])
 (height, width) = (int(height), int(width))
 COPYING = ['unstickpixels – screen loop to try to unstick dead pixels',
            '',
-           'Copyright © 2013  Mattias Andrée (maandree@member.fsf.org)',
+           'Copyright © 2013, 2015  Mattias Andrée (maandree@member.fsf.org)',
            '',
            'This program is free software: you can redistribute it and/or modify',
            'it under the terms of the GNU General Public License as published by',
@@ -51,8 +51,28 @@ COPYING = ['unstickpixels – screen loop to try to unstick dead pixels',
            'along with this program.  If not, see <http://www.gnu.org/licenses/>.']
 
 print('\033[?25l\033[H\033[2J\033[%i;%iH%s' % (height - len(COPYING) + 1, 1, '\n'.join(COPYING)), '')
-print('\033[H\033[01;31mWARNING: Do not used this if you have epilepsia \033[00m\n')
+print('\033[H\033[01;31mWARNING: Do not used this if you have epilepsia.\033[00m')
+print('')
+print('It is recommended to massage the defective dots, whilst')
+print('running this program.')
+print('')
 print('Press C-c to quit, and Enter to start (C-c will quit).')
+print('')
+print('')
+print('You should not have to run this program. If the manufacture or')
+print('reseller of your monitor refuse to replace or repair the monitor')
+print('that was broken, because of manufacturing error, when it was')
+print('chiped to you, please consider yelling at the support, threaten')
+print('to report the personally because of involvement in organised')
+print('crime (not replacing hardware that was chipped broken when you')
+print('selled it is a crime, and they do this in an organised fashion')
+print('to make money), call their executive director persistently at')
+print('inconvenient times, report them applicable board for consumer')
+print('disputes/complaints or equivalent agency. If this program does')
+print('not help, and the manufacture is Packard Bell, or its')
+print('supersidiary Acer, tell them that you have tried a program')
+print('that was prompted by the complete suckness and incapability')
+print('to repair defects that they have agreed to repair. They suck!')
 
 started = False
 try:
