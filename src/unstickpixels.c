@@ -413,7 +413,7 @@ int main(int argc, char* argv[])
   int started = 0;
   int with_sleep = 0;
   struct timespec interval;
-  int _status, vt = 0, c = 0;
+  int status, vt = 0, c = 0;
   pid_t pid = -1;
   int saved_errno;
   
@@ -474,12 +474,12 @@ int main(int argc, char* argv[])
   return 0;
   
  parent:
-  waitpid(pid, &_status, 0);
+  waitpid(pid, &status, 0);
  done:
   if (!vt)
     term_clut();
   printf("%s\033[?25h\033[H\033[2J", (started && vt) ? "\033]P0000000" : "");
   fflush(stdout);
-  return 0; /* TODO return 1 on failure */
+  return WIFEXITED(status) ? WEXITSTATUS(status) : 0;
 }
 
