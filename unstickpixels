@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 ##
-# unstickpixels – screen loop to try to unstick dead pixels
+# unstickpixels – screen loop to try to unstick stuck pixels
 # 
 # Copyright © 2013, 2015  Mattias Andrée (maandree@member.fsf.org)
 # 
@@ -33,7 +33,7 @@ sleep = 0 if len(sys.argv) < 2 else int(sys.argv[1])
 
 (height, width) = Popen(['stty', 'size'], stdout=PIPE).communicate()[0].decode('utf-8', 'replace').split(' ')
 (height, width) = (int(height), int(width))
-COPYING = ['unstickpixels – screen loop to try to unstick dead pixels',
+COPYING = ['unstickpixels – screen loop to try to unstick stuck pixels',
            '',
            'Copyright © 2013, 2015  Mattias Andrée (maandree@member.fsf.org)',
            '',
