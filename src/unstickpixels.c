@@ -36,7 +36,7 @@
 
 
 #define WELCOME_MESSAGE								\
-  "\033[H\033[01;31mWARNING: Do not used this if you have epilepsia.\033[00m\n"	\
+  "\033[H\033[01;31mWARNING: Do not use this if you have epilepsia.\033[00m\n"	\
   "\n"										\
   "It is recommended to massage the defective dots, whilst\n"			\
   "running this program.\n"							\
