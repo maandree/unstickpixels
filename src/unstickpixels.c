@@ -36,7 +36,6 @@
 
 
 #define WELCOME_MESSAGE								\
-  "\033[?25l\033[H\033[2J"							\
   "\033[H\033[01;31mWARNING: Do not used this if you have epilepsia.\033[00m\n"	\
   "\n"										\
   "It is recommended to massage the defective dots, whilst\n"			\
@@ -430,6 +429,7 @@ int main(int argc, char* argv[])
   if (optind < argc)
     usage();
   
+  printf("\033[?25l\033[H\033[2J");
   printf(WELCOME_MESSAGE);
   fflush(stdout);
   
