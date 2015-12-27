@@ -1,0 +1,113 @@
+.TH UNSTICKPIXELS 1 UNSTICKPIXELS
+.SH NAME
+unstickpixels \- Screen loop to try to unstick stuck dots
+.SH SYNOPSIS
+.B unstickpixels
+.RI [ OPTION ]...\ [\fB--\fP]
+.RI [ INTERVAL ]
+.SH DESCRIPTION
+.B unstickpixels
+shall cycle the colours on the screen between
+sRGB(100 %, 0, 0), sRGB(0, 100 %, 0), and sRGB(0, 0, 100 %),
+as fast as possible, or sleep INTERVAL milliseconds between
+each switch.
+.PP
+You should disable powersaving on your monitors and disable
+the screensaver whilst running this program, or otherwise
+make sure that screen loop is always displayed.
+.PP
+Running this program for a number of hours, especially if
+combined with massaging defective dots, may heal defective
+dots. Dead dots (always black) are hard to revive, but
+stuck dots are more probable to get fixed.
+.PP
+You must not run this program if you are epileptic. Seek
+someone else how can do it for you.
+.PP
+.B unstickpixels
+uses the graphics cards' colour lookup tables
+to switch the colour displayed on the screen. If your
+computers does not supports this, the option
+.B -v
+may help, it will use the framebuffer indirectly, via the
+terminal. Unless 
+.B -v
+is used,
+.B unstickpixels runs both in
+.B X
+and on the Linux VT.
+.SH OPTIONS
+.TP
+.BR \-v
+Use the Linux VT instead of the graphics cards'
+colour lookup tables (CLUT). This requires that the
+program runs under the Linux VT, otherwise known
+as the TTY. This may not work too great one all
+graphics cards, some very expensive graphics cards
+are really bad. NVIDIA is known case of this,
+why the CLUT utilisation was added.
+
+If you are using a graphical environment and do not
+know how to access the Linux VT, here is how you do
+it: press
+.BR Ctrl+Alt+F1 ,
+if this does not open non-graphical login screen, press
+.B Alt+Right
+until you get one. To get back to graphical environment,
+hold down
+.B Alt+Right
+until it appears.
+
+Whilst unstickpixels may run on most systems (although
+Mir and, by Wayland's design, Wayland are not supported)
+this option is only known to function on Linux.
+.SH RATIONALE
+Acer/Packard Bell is not willing to repair all defects on
+my computer, but at least I can run this for several hours
+and try to revive dead pixels. Playing back a video that is
+already available on the Internet has some deficiencies:
+.TP
+*
+Requires a graphics card and video player that can
+play back the video in full screen mode efficiently.
+.TP
+*
+Requires
+.B X
+or a video player than can play video outside
+.B X
+efficiently.
+.TP
+*
+Requires the video to be downloaded if it was uploaded
+on Youtube, because Youtube does not properly support
+full screen.
+.TP
+*
+One video playback is required per defective monitor.
+.SH "SEE ALSO"
+No similar or otherwise related programs known, please
+file a bug if you know any.
+.TP
+There are some similar works in form of videos available
+on the Internet.
+.PP
+Full documentation available locally via: info \(aq(unstickpixels)\(aq
+.SH LICENSE
+Copyright \(co 2015  Mattias Andrée
+.br
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+.br
+This is free software: you are free to change and redistribute it.
+.br
+There is NO WARRANTY, to the extent permitted by law.
+.SH 
+.PP
+Copying and distribution of this manual, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.  This file is offered as-is,
+without any warranty.
+.SH BUGS
+Please report bugs to <https://github.com/maandree/unstickpixels/issues>
+or to <maandree@member.fsf.org>.
+
