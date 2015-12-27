@@ -1,0 +1,14 @@
+@node Invoking
+@chapter Invoking
+
+@emph{Do not use this if you have epilepsia}
+
+@command{unstickpixels} will not run in a graphical environment.
+If you are using a graphical environment and do not know how
+to access the Linux VT, here is how you do it: press @kbd{Ctrl+Alt+F1},
+if this does not open non-graphical login screen, press @kbd{Alt+Right}
+until you get one. To get back to graphical environment, hold
+down @kbd{Alt+Right} until it appears.
+
+Run @command{unstickpixels} without arguments.
+

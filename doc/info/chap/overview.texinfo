@@ -1,0 +1,14 @@
+@node Overview
+@chapter Overview
+
+@command{unstickpixels} tries to unstick stuck pixels.
+
+Dead (always black) pixels are hard to revive, stuck pixels
+on the other hand are more probable to get fixed.
+
+This program should be run under the Linux VT. It works by
+cycling the colour on the screen between sRGB(100 %, 0, 0),
+sRGB(0, 100 %, 0) and sRGB(0, 0, 100 %), as fast as possible.
+If you want to slow down the cycling you can add, as the only
+argument, the millisecond time sleep between the colours.
+
