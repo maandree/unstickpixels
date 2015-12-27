@@ -17,6 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #define _XOPEN_SOURCE 700
+#define _DEFAULT_SOURCE
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -202,11 +203,13 @@ static void usage(void)
  */
 static void term_clut()
 {
-  size_t i;
+  size_t i, j;
+  if (clut_state == 2)
+    for (j = 0; j < 2; j++, usleep(1000000L / 10L))
+      for (i = 0; crtcs && crtcs[i]; i++, usleep(1000000L / 100L))
+	libgamma_crtc_set_gamma_ramps16(crtcs[i], *(ramps_saved[i]));
   for (i = 0; crtcs && crtcs[i]; i++)
     {
-      if (clut_state == 2)
-	libgamma_crtc_set_gamma_ramps16(crtcs[i], *(ramps_saved[i]));
       libgamma_crtc_free(crtcs[i]);
       libgamma_gamma_ramps16_free(ramps_red[i]);
       libgamma_gamma_ramps16_free(ramps_green[i]);
@@ -463,6 +466,8 @@ int main(int argc, char* argv[])
   
  fail:
   saved_errno = errno;
+  printf("%s\033[?25h\033[H\033[2J", (started && vt) ? "\033]P0000000" : "");
+  fflush(stdout);
   if (!vt)
     term_clut();
   errno = saved_errno;
