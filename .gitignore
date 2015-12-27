@@ -1,4 +1,7 @@
 _/
+/bin/
+/obj/
+/aux/
 __pycache__/
 .*
 !.git*

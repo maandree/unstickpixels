@@ -1,14 +1,39 @@
 @node Invoking
 @chapter Invoking
 
-@emph{Do not use this if you have epilepsia}
+@emph{You must not run this program if you are epileptic.}
+Seek someone else how can do it for you.
 
-@command{unstickpixels} will not run in a graphical environment.
-If you are using a graphical environment and do not know how
-to access the Linux VT, here is how you do it: press @kbd{Ctrl+Alt+F1},
-if this does not open non-graphical login screen, press @kbd{Alt+Right}
-until you get one. To get back to graphical environment, hold
-down @kbd{Alt+Right} until it appears.
+@command{unstickpixels} recognises the following options
+@table @option
+@item -v
+Use the Linux VT instead of the graphics cards' colour
+lookup tables (CLUT). This requires that the program runs
+under the Linux VT, otherwise known as the TTY. This may
+not work too great one all graphics cards, some very
+expensive graphics cards are really bad. NVIDIA is known
+case of this, why the CLUT utilisation was added.
 
-Run @command{unstickpixels} without arguments.
+If you are using a graphical environment and do not know
+how to access the Linux VT, here is how you do it: press
+@kbd{Ctrl+Alt+F1}, if this does not open non-graphical
+login screen, press @kbd{Alt+Right} until you get one.
+To get back to graphical environment, hold down
+@kbd{Alt+Right} until it appears.
+
+Whilst @command{unstickpixels} may run on most systems
+(although Mir and, by Wayland's design, Wayland are
+not supported) this option is only known to function on Linux.
+@end table
+
+@command{unstickpixels} accepts at most one non-option
+argument. This argument is the number of milliseconds
+to sleep between each color switch. This may be useful
+to optimise the effect. It may help to sleep 10 milliseconds
+between each colour switch rather than switching the
+colours as fast as possible.
+
+You should disable powersaving on your monitors and
+disable the screensaver whilst running this program,
+or otherwise make sure that screen loop is always displayed.
 

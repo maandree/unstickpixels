@@ -10,6 +10,7 @@
 @menu
 * Overview::                                Brief overview of @command{unstickpixels}.
 * Invoking::                                Invocation of @command{unstickpixels}.
+* Rationale::                               Rationale for writing @command{unstickpixels}.
 
 * Free Software Needs Free Documentation::  Why free documentation is important.
 * GNU General Public License::              Copying and sharing @command{unstickpixels}.
@@ -20,6 +21,7 @@
 
 @include chap/overview.texinfo
 @include chap/invoking.texinfo
+@include chap/rationale.texinfo
 
 @include appx/free-software-needs-free-documentation.texinfo
 

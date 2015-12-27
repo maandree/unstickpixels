@@ -67,7 +67,8 @@ _TEXINFO_DIRLEVELS = 2
 _INFOPARTS = 0
 _HAVE_TEXINFO_MANUAL = yes
 _HTML_FILES = Free-Software-Needs-Free-Documentation.html  GNU-Free-Documentation-License.html  \
-              GNU-General-Public-License.html  index.html  Invoking.html  Overview.html
+              GNU-General-Public-License.html  index.html  Invoking.html  Overview.html  \
+              Rationale.html
 
 # Used by mk/man.mk
 _MAN_PAGE_SECTIONS = 1
@@ -79,7 +80,7 @@ _COPYING = COPYING
 # Used by mk/dist.mk
 ___EVERYTHING_INFO = scrotty titlepage-data content hardcopy-copying  \
                      appx/fdl appx/free-software-needs-free-documentation appx/gpl  \
-                     chap/invoking chap/overview  \
+                     chap/invoking chap/overview chap/rationale  \
                      reusable/macros reusable/paper reusable/titlepage
 _EVERYTHING = $(foreach F,$(___EVERYTHING_INFO),doc/info/$(F).texinfo)  \
               $(__EVERYTHING_ALL_COMMON) DEPENDENCIES INSTALL NEWS
