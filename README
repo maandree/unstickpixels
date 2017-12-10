@@ -2,12 +2,12 @@ NAME
 	unstickpixels - Screen loop to try to unstick stuck dots
 
 SYNOPSIS
-	unstickpixels [OPTIONS...] [--] [INTERVAL]
+	unstickpixels [-v] [interval]
 
 DESCRIPTION
 	unstickpixels shall cycle the colours on the screen between
 	sRGB(100 %, 0, 0), sRGB(0, 100 %, 0), and sRGB(0, 0, 100 %),
-	as fast as possible, or sleep INTERVAL milliseconds between
+	as fast as possible, or sleep interval milliseconds between
 	each switch.
 
 	You should disable powersaving on your monitors and disable
@@ -74,6 +74,3 @@ SEE ALSO
 
 	There are some similar works in form of videos available
 	on the Internet.
-
-	Full documentation available locally via: info '(unstickpixels)'
-

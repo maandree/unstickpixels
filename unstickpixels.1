@@ -3,14 +3,15 @@
 unstickpixels \- Screen loop to try to unstick stuck dots
 .SH SYNOPSIS
 .B unstickpixels
-.RI [ OPTION ]...\ [\fB--\fP]
-.RI [ INTERVAL ]
+[-v]
+.RI [ interval ]
 .SH DESCRIPTION
 .B unstickpixels
 shall cycle the colours on the screen between
 sRGB(100 %, 0, 0), sRGB(0, 100 %, 0), and sRGB(0, 0, 100 %),
-as fast as possible, or sleep INTERVAL milliseconds between
-each switch.
+as fast as possible, or sleep
+.I interval
+milliseconds between each switch.
 .PP
 You should disable powersaving on your monitors and disable
 the screensaver whilst running this program, or otherwise
@@ -92,23 +93,3 @@ file a bug if you know any.
 .TP
 There are some similar works in form of videos available
 on the Internet.
-.PP
-Full documentation available locally via: info \(aq(unstickpixels)\(aq
-.SH LICENSE
-Copyright \(co 2013, 2015  Mattias Andrée
-.br
-License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
-.br
-This is free software: you are free to change and redistribute it.
-.br
-There is NO WARRANTY, to the extent permitted by law.
-.SH 
-.PP
-Copying and distribution of this manual, with or without modification,
-are permitted in any medium without royalty provided the copyright
-notice and this notice are preserved.  This file is offered as-is,
-without any warranty.
-.SH BUGS
-Please report bugs to <https://github.com/maandree/unstickpixels/issues>
-or to <maandree@member.fsf.org>.
-
