@@ -164,7 +164,8 @@ usage(void)
  * 
  * @return  0 on success, -1 on error.
  */
-static void term_clut()
+static void
+term_clut(void)
 {
 	size_t i, j;
 	if (clut_state == 2)
@@ -178,15 +179,22 @@ static void term_clut()
 		libgamma_gamma_ramps16_free(ramps_blue[i]);
 		libgamma_gamma_ramps16_free(ramps_saved[i]);
 	}
-	free((void *)crtcs);
-	free((void *)ramps_red);
-	free((void *)ramps_green);
-	free((void *)ramps_blue);
-	free((void *)ramps_saved);
+#if defined(__GNUC__)
+# pragma GCC diagnostic push
+# pragma GCC diagnostic ignored "-Wdiscarded-qualifiers"
+#endif
+	free(crtcs);
+	free(ramps_red);
+	free(ramps_green);
+	free(ramps_blue);
+	free(ramps_saved);
 	for (i = 0; parts && parts[i]; i++)
 		libgamma_partition_free(parts[i]);
-	free((void *)parts);
-	free((void *)sitename);
+	free(parts);
+	free(sitename);
+#if defined(__GNUC__)
+# pragma GCC diagnostic pop
+#endif
 	if (clut_state)
 		libgamma_site_destroy(&site);
 	sitename = NULL;
@@ -202,7 +210,8 @@ static void term_clut()
  * 
  * @return  0 on success, -1 on error.
  */
-static int init_clut()
+static int
+init_clut(void)
 {
 	int method, error = 0;
 	size_t i, j, k, n = 0;
@@ -361,7 +370,7 @@ fail:
 static void
 sigexit(int signo)
 {
-	signal(signo, sigexit);
+	(void) signo;
 	please_exit = 1;
 }
 
@@ -374,6 +383,7 @@ main(int argc, char *argv[])
 	struct timespec interval;
 	int status, vt = 0;
 	pid_t pid = -1;
+	struct sigaction sa;
 	int saved_errno;
 
 	ARGBEGIN {
@@ -394,14 +404,13 @@ main(int argc, char *argv[])
 	printf(WELCOME_MESSAGE);
 	fflush(stdout);
 
-	siginterrupt(SIGHUP, 1);
-	siginterrupt(SIGTERM, 1);
-	siginterrupt(SIGINT, 1);
-	siginterrupt(SIGQUIT, 1);
-	signal(SIGHUP, sigexit);
-	signal(SIGTERM, sigexit);
-	signal(SIGINT, sigexit);
-	signal(SIGQUIT, sigexit);
+	memset(&sa, 0, sizeof(sa));
+	sa.sa_handler = sigexit;
+	sa.sa_flags = SA_RESTART;
+	sigaction(SIGHUP,  &sa, NULL);
+	sigaction(SIGTERM, &sa, NULL);
+	sigaction(SIGINT,  &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
 
 	if (read(STDIN_FILENO, &started, 1) < 0)
 		goto done;
