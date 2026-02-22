@@ -12,7 +12,7 @@ DESCRIPTION
 
 	You should disable powersaving on your monitors and disable
 	the screensaver whilst running this program, or otherwise
-	make sure that screen loop is always displayed.
+	make sure that the screen loop is always displayed.
 
 	Running this program for a number of hours, especially if
 	combined with massaging defective dots, may heal defective
@@ -20,11 +20,11 @@ DESCRIPTION
 	stuck dots are more probable to get fixed.
 
 	You must not run this program if you are epileptic. Seek
-	someone else how can do it for you.
+	someone else who can do it for you.
 
 	unstickpixels uses the graphics cards' colour lookup tables
 	to switch the colour displayed on the screen. If your
-	computers does not supports this, the option -v may help,
+	computer does not support this, the option -v may help,
 	it will use the framebuffer indirectly, via the terminal.
 	Unless -v is used, unstickpixels runs both in X and on the
 	Linux VT.
@@ -33,14 +33,14 @@ OPTIONS
 	-v	Use the Linux VT instead of the graphics cards'
 		colour lookup tables (CLUT). This requires that the
 		program runs under the Linux VT, otherwise known
-		as the TTY. This may not work too great one all
+		as the TTY. This may not work too well on all
 		graphics cards, some very expensive graphics cards
-		are really bad. NVIDIA is known case of this,
-		why the CLUT utilisation was added.
+		are really bad. NVIDIA is a known case of this,
+		which is why the CLUT utilisation was added.
 
 		If you are using a graphical environment and do not
 		know how to access the Linux VT, here is how you do
-		it: press Ctrl+Alt+F1, if this does not open non-graphical
+		it: press Ctrl+Alt+F1, if this does not open a non-graphical
 		login screen, press Alt+Right until you get one. To
 		get back to graphical environment, hold down Alt+Right
 		until it appears.
@@ -59,7 +59,7 @@ RATIONALE
 	*	Requires a graphics card and video player that can
 		play back the video in full screen mode efficiently.
 
-	*	Requires X or a video player than can play video
+	*	Requires X or a video player that can play video
 		outside X efficiently.
 
 	*	Requires the video to be downloaded if it was uploaded
@@ -69,7 +69,7 @@ RATIONALE
 	*	One video playback is required per defective monitor.
 
 SEE ALSO
-	No similar or otherwise related programs known, please
+	No similar or otherwise related programs are known, please
 	file a bug if you know any.
 
 	There are some similar works in form of videos available

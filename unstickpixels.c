@@ -17,7 +17,7 @@
 #define t(...) do { if (__VA_ARGS__) goto fail; } while (0)
 
 #define WELCOME_MESSAGE\
-	"\033[H\033[01;31mWARNING: Do not use this if you have epilepsia.\033[00m\n"\
+	"\033[H\033[01;31mWARNING: Do not use this if you have epilepsy.\033[00m\n"\
 	"\n"\
 	"It is recommended to massage the defective dots, whilst\n"\
 	"running this program.\n"\
@@ -25,19 +25,19 @@
 	"Press C-c to quit, and Enter to start (C-c will quit).\n"\
 	"\n"\
 	"\n"\
-	"You should not have to run this program. If the manufacture or\n"\
-	"reseller of your monitor refuse to replace or repair the monitor\n"\
-	"that was broken, because of manufacturing error, when it was\n"\
-	"chiped to you, please consider yelling at the support, threaten\n"\
-	"to report the personally because of involvement in organised\n"\
-	"crime (not replacing hardware that was chipped broken when you\n"\
-	"selled it is a crime, and they do this in an organised fashion\n"\
+	"You should not have to run this programme. If the manufacturer or\n"\
+	"reseller of your monitor refuses to replace or repair the monitor\n"\
+	"that was broken, because of a manufacturing error, when it was\n"\
+	"shipped to you, please consider yelling at the support, threaten\n"\
+	"to report them personally because of involvement in organised\n"\
+	"crime (not replacing hardware that was shipped broken when you\n"\
+	"sold it is a crime, and they do this in an organised fashion\n"\
 	"to make money), call their executive director persistently at\n"\
-	"inconvenient times, report them applicable board for consumer\n"\
-	"disputes/complaints or equivalent agency. If this program does\n"\
-	"not help, and the manufacture is Packard Bell, or its\n"\
-	"supersidiary Acer, tell them that you have tried a program\n"\
-	"that was prompted by the complete suckness and incapability\n"\
+	"inconvenient times, report them to the applicable board for consumer\n"\
+	"disputes/complaints or equivalent agency. If this programme does\n"\
+	"not help, and the manufacturer is Packard Bell, or its\n"\
+	"subsidiary Acer, tell them that you have tried a programme\n"\
+	"that was prompted by the complete suckiness and incapability\n"\
 	"to repair defects that they have agreed to repair. They suck!"
 
 /**
@@ -113,6 +113,7 @@ get_interval(const char *restrict arg, struct timespec *restrict interval, int *
 {
 	char *end;
 	*nonzero = 1;
+
 	errno = EINVAL;
 	t (!isdigit(*arg));
 	interval->tv_sec = (time_t)(errno = 0, strtol)(arg, &end, 10);
@@ -130,7 +131,7 @@ fail:
 
 
 /**
- * Wrapper for fork(3) that clocks all signals in the parent.
+ * Wrapper for fork(3) that blocks all signals in the parent.
  * 
  * @return  See fork(3).
  */
