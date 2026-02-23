@@ -58,37 +58,37 @@ static char *sitename = NULL;
 /**
  * The site.
  */
-static libgamma_site_state_t site;
+static struct libgamma_site_state site;
 
 /**
  * The partitions.
  */
-static libgamma_partition_state_t *restrict *restrict parts = NULL;
+static struct libgamma_partition_state *restrict *restrict parts = NULL;
 
 /**
  * The CRTC:s.
  */
-static libgamma_crtc_state_t *restrict *restrict crtcs = NULL;
+static struct libgamma_crtc_state *restrict *restrict crtcs = NULL;
 
 /**
  * The ramps to use when displaying red.
  */
-static libgamma_gamma_ramps16_t *restrict *restrict ramps_red = NULL;
+static struct libgamma_gamma_ramps16 *restrict *restrict ramps_red = NULL;
 
 /**
  * The ramps to use when displaying green.
  */
-static libgamma_gamma_ramps16_t *restrict *restrict ramps_green = NULL;
+static struct libgamma_gamma_ramps16 *restrict *restrict ramps_green = NULL;
 
 /**
  * The ramps to use when displaying blue.
  */
-static libgamma_gamma_ramps16_t *restrict *restrict ramps_blue = NULL;
+static struct libgamma_gamma_ramps16 *restrict *restrict ramps_blue = NULL;
 
 /**
  * The original ramps.
  */
-static libgamma_gamma_ramps16_t *restrict *restrict ramps_saved = NULL;
+static struct libgamma_gamma_ramps16 *restrict *restrict ramps_saved = NULL;
 
 /**
  * 2: `site` initialised and all ramps saved.
@@ -172,7 +172,7 @@ term_clut(void)
 	if (clut_state == 2)
 		for (j = 0; j < 2; j++, usleep(1000000L / 10L))
 			for (i = 0; crtcs && crtcs[i]; i++, usleep(1000000L / 100L))
-				libgamma_crtc_set_gamma_ramps16(crtcs[i], *(ramps_saved[i]));
+				libgamma_crtc_set_gamma_ramps16(crtcs[i], ramps_saved[i]);
 	for (i = 0; crtcs && crtcs[i]; i++) {
 		libgamma_crtc_free(crtcs[i]);
 		libgamma_gamma_ramps16_free(ramps_red[i]);
@@ -216,15 +216,18 @@ init_clut(void)
 {
 	int method, error = 0;
 	size_t i, j, k, n = 0;
-	libgamma_crtc_information_t info;
-  
+	struct libgamma_crtc_information info;
+	const char *const_sitename;
+
 	if (libgamma_list_methods(&method, 1, 0) < 1) {
 		fprintf(stderr, "%s: could not get adjustment method, try '%s -v'.\n", argv0, argv0);
 		return -1;
 	}
 
-	if ((sitename = libgamma_method_default_site(method)))
-		t (!(sitename = strdup(sitename)));
+	if ((const_sitename = libgamma_method_default_site(method)))
+		t (!(sitename = strdup(const_sitename)));
+	else
+		sitename = NULL;
 	t ((error = libgamma_site_initialise(&site, method, sitename)));
 	sitename = NULL;
 
@@ -262,7 +265,7 @@ init_clut(void)
 			t (!(ramps_blue[k]  = calloc(1, sizeof(**ramps_blue))));
 			t (!(ramps_saved[k] = calloc(1, sizeof(**ramps_saved))));
 			t ((error = libgamma_crtc_initialise(crtcs[k], parts[i], j)));
-			if (libgamma_get_crtc_information(&info, crtcs[k], LIBGAMMA_CRTC_INFO_GAMMA_SIZE))
+			if (libgamma_get_crtc_information(&info, sizeof(info), crtcs[k], LIBGAMMA_CRTC_INFO_GAMMA_SIZE))
 				t ((error = info.gamma_size_error));
 			ramps_red[k]->red_size   = info.red_gamma_size;
 			ramps_red[k]->green_size = info.green_gamma_size;
@@ -312,17 +315,17 @@ loop_clut(const struct timespec *restrict interval)
 
 	while (!please_exit) {
 		for (i = 0; crtcs[i]; i++)
-			t ((error = libgamma_crtc_set_gamma_ramps16(crtcs[i], *(ramps_red[i]))));
+			t ((error = libgamma_crtc_set_gamma_ramps16(crtcs[i], ramps_red[i])));
 		if (interval)
 			t ((errno = clock_nanosleep(CLOCK_MONOTONIC, 0, interval, NULL)));
 
 		for (i = 0; crtcs[i]; i++)
-			t ((error = libgamma_crtc_set_gamma_ramps16(crtcs[i], *(ramps_green[i]))));
+			t ((error = libgamma_crtc_set_gamma_ramps16(crtcs[i], ramps_green[i])));
 		if (interval)
 			t ((errno = clock_nanosleep(CLOCK_MONOTONIC, 0, interval, NULL)));
 
 		for (i = 0; crtcs[i]; i++)
-			t ((error = libgamma_crtc_set_gamma_ramps16(crtcs[i], *(ramps_blue[i]))));
+			t ((error = libgamma_crtc_set_gamma_ramps16(crtcs[i], ramps_blue[i])));
 		if (interval)
 			t ((errno = clock_nanosleep(CLOCK_MONOTONIC, 0, interval, NULL)));
 	}
